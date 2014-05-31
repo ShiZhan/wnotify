@@ -1,0 +1,9 @@
+{
+  "url": ["http://shizhan.github.io/archive.html"],
+  "cycle": 3600,
+  "filters": {
+    "^http://shizhan.github.io/archive.html$": "div.content a",
+    "^http://shizhan.github.io/\d{4}/\d{2}/\d{2}/.*": "div.page-header"
+  },
+  "store": "shizhan_github_io"
+}

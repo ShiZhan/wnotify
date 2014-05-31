@@ -12,7 +12,7 @@ object Beacon {
       case "-v" :: Nil => println(helper.Version.get)
       case json if (!json.isEmpty) =>
         println("Loading JSON:")
-        println(json.mkString(", "))
+        println(helper.Config.fromFile(json.head).url)
       case _ => println(incorrectArgs)
     }
   }

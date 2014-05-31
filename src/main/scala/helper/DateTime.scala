@@ -5,7 +5,7 @@ package helper
 
 /**
  * @author ShiZhan
- *
+ * Get current time and convert to RFC format
  */
 object DateTime {
   import java.text.SimpleDateFormat
