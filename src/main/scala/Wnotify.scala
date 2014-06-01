@@ -1,7 +1,9 @@
 object Wnotify {
-  import helper.{ OptParse, Version }
+  import helper.OptParse._
+  import helper.Version
+  import kernel.Watcher
 
-  val usage = """usage: wnotify <-c cycle|-s selector> [URL]
+  val usage = """usage: wnotify [-hv] [-c cycle|-s selector] [URL]
  -h   print this message
  -v   show program version
  -c   cycle
@@ -14,9 +16,8 @@ object Wnotify {
       case "-h" :: Nil => println(usage)
       case "-v" :: Nil => println(Version.get)
       case optList if (!optList.isEmpty) =>
-        val options = OptParse.parse(optList)
-        println("Options:")
-        println(options.mkString("; "))
+        val options = parse(optList)
+        Watcher.run(options.target, options.cycle, options.selector)
       case _ => println(incorrectArgs)
     }
   }

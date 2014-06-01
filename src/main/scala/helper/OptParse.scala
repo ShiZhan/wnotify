@@ -6,11 +6,18 @@ object OptParse {
   def parse(optList: List[String]): Options = {
     optList match {
       case Nil => Map()
-      case "-c" :: cycle :: more => parse(more) ++ Map('cycle -> cycle.toInt)
+      case "-c" :: cycle :: more =>
+        val value = try { cycle.toInt } catch { case e: Exception => 0 }
+        if (0 == value) parse(more) // 0 is invalid here
+        else parse(more) ++ Map('cycle -> cycle.toInt)
       case "-s" :: selector :: more => parse(more) ++ Map('selector -> selector)
-      case url :: more if (url.startsWith("http://") || url.startsWith("https://")) =>
-        parse(more) ++ Map('url -> url)
-      case unknown :: more => parse(more)
+      case target :: more => parse(more) ++ Map('target -> target)
     }
+  }
+
+  implicit class OptionsWrapper(o: Options) { // set defaults and get values
+    val target = o.get('target) match { case Some(t: String) => t; case _ => "" }
+    val cycle = o.get('cycle) match { case Some(c: Int) => c; case _ => 3600 }
+    val selector = o.get('selector) match { case Some(s: String) => s; case _ => "body" }
   }
 }
