@@ -18,8 +18,8 @@ object MyBuild extends Build {
     }
   }
 
-  lazy val beacon = Project(
-    id = "beacon",
+  lazy val wnotify = Project(
+    id = "wnotify",
     base = file("."),
     settings = Defaults.defaultSettings ++
     Seq(

@@ -10,11 +10,11 @@ esac
 export PRG_ROOT=$(dirname `which $0`)
 LIB=$PRG_ROOT/target/scala-2.10/lib/
 CP=`ls -1 $LIB | awk -v lib=$LIB 'BEGIN { FS = "*" }; {printf lib$1":"}'`
-CP=$CP$PRG_ROOT/target/scala-2.10/beacon_2.10-1.0.jar
+CP=$CP$PRG_ROOT/target/scala-2.10/wnotify_2.10-1.0.jar
 
 if $cygwin; then
   CP=`cygpath -alpm $CP`
   PRG_ROOT=`cygpath -alm $PRG_ROOT`
 fi
 
-java -Xmx2g -cp "$CP" Beacon "$@" 
+java -Xmx2g -cp "$CP" Wnotify "$@" 

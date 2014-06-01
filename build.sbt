@@ -1,4 +1,4 @@
-name := "beacon"
+name := "wnotify"
 
 version := "1.0"
 

@@ -1,12 +1,12 @@
-object Beacon {
-  val usage = """usage: Beacon
+object Wnotify {
+  val usage = """usage: wnotify
  -h   print this message
  -v   show program version
  [JSON]   loading JSON configuration"""
   val incorrectArgs = "Incorrect parameters, see help (Present -h)."
 
   def main(args: Array[String]) = {
-    println("Beacon program")
+    println("wNotify program")
     args.toList match {
       case "-h" :: Nil => println(usage)
       case "-v" :: Nil => println(helper.Version.get)
