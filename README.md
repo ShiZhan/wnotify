@@ -18,7 +18,7 @@ Or use "sbt assembly" to build JAR file for running directly from command line:
 
 How to use
 ==========
-`wNotify [-vh] [-c cycle|-s selector] [URL]`
+`wNotify [-vh] [-c cycle|-s selector|-d] [URL]`
 
 * -h:  show help information
 * -v:  show version
