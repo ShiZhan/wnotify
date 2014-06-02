@@ -22,8 +22,7 @@ object MyBuild extends Build {
     id = "wnotify",
     base = file("."),
     settings = Defaults.defaultSettings ++
-    Seq(
-      copyDepTask
-    )
+    sbtassembly.Plugin.assemblySettings ++
+    copyDepTask
   )
 }

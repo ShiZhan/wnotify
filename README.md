@@ -2,6 +2,18 @@ wNotify
 =======
 iNotify for capturing change of Web page content.
 
+Build
+=====
+Deploy [Java](http://www.oracle.com/technetwork/java/javase/downloads/index.html) and [sbt](http://www.scala-sbt.org/)
+
+1. Start sbt in project root
+2. Run "package"
+3. Use the scripts: wnotify (*NIX), wnotify (Windows) to run
+
+Or use "sbt assembly" to build JAR file for running directly from command line:
+
+`java -jar wnotify-assembly-1.0.jar [options]`
+
 How to use
 ==========
 wNotify [-vh] [-c cycle|-s selector] [URL]
@@ -22,4 +34,4 @@ Time                       Checksum
 
 Use Ctrl+C to stop
 
-[Zhan.Shi](http://shizhan.github.io/)
+[Zhan.Shi](http://shizhan.github.io/) (c) 2013 [Apache License Version 2.0](http://www.apache.org/licenses/)
