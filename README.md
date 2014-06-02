@@ -1,6 +1,6 @@
 wNotify
 =======
-iNotify for capturing change of Web page content.
+iNotify-like program for capturing change of Web content.
 
 Build
 =====
@@ -36,4 +36,4 @@ output:
 
 Use Ctrl+C to stop
 
-[Zhan.Shi](http://shizhan.github.io/) (c) 2013 [Apache License Version 2.0](http://www.apache.org/licenses/)
+[Zhan.Shi](http://shizhan.github.io/) (c) 2014 [Apache License Version 2.0](http://www.apache.org/licenses/)

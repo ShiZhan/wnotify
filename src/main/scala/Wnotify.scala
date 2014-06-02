@@ -16,10 +16,11 @@ object Wnotify {
     args.toList match {
       case "-h" :: Nil => println(usage)
       case "-v" :: Nil => println(Version.get)
-      case optList if (!optList.isEmpty) =>
+      case optList =>
         val options = parse(optList)
-        Watcher.run(options.target, options.cycle, options.selector, options.diff)
-      case _ => println(incorrectArgs)
+        if (options.isValid)
+          Watcher.run(options.target, options.cycle, options.selector, options.diff)
+        else println(incorrectArgs)
     }
   }
 }
