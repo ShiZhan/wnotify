@@ -17,7 +17,7 @@ object OptParse {
 
   implicit class OptionsWrapper(o: Options) { // set defaults and get values
     val target = o.get('target) match { case Some(t: String) => t; case _ => "" }
-    val cycle = o.get('cycle) match { case Some(c: Int) => c; case _ => 3600 }
+    val cycle = o.get('cycle) match { case Some(c: Int) => c; case _ => 3600 * 1000 }
     val selector = o.get('selector) match { case Some(s: String) => s; case _ => "body" }
   }
 }
