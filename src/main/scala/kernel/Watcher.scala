@@ -2,6 +2,7 @@ package kernel
 
 object Watcher {
   import java.net.URL
+  import scala.collection.mutable.MutableList
   import org.apache.commons.codec.digest.DigestUtils.md5Hex
   import org.apache.commons.validator.routines.UrlValidator
   import org.jsoup.Jsoup
@@ -12,7 +13,7 @@ object Watcher {
   private val httpSchemes = Array("http", "https")
   private val httpValidator = new UrlValidator(httpSchemes)
   private val timeout = 2000
-  private var webLog = List[(Long, String)]((getMillis, "start"))
+  private val webLog = MutableList[(Long, String)]((getMillis, "start"))
 
   def run(target: String, cycle: Int, selector: String) = {
     if (httpValidator.isValid(target)) {
@@ -25,7 +26,7 @@ object Watcher {
           val area = doc.select(selector)
           val checksum = md5Hex(area.toString)
           if (checksum != webLog.last._2) println(dateTime.toDate + "; " + checksum)
-          webLog :+ (dateTime, checksum)
+          webLog += ((dateTime, checksum))
         } catch {
           case e: Exception => println(e)
         }
