@@ -6,7 +6,7 @@ object Wnotify {
   val usage = """usage: wnotify [-hv] [-c cycle|-s selector] [URL]
  -h   print this message
  -v   show program version
- -c   cycle
+ -c   cycle (millisecond)
  -s   selector"""
   val incorrectArgs = "Incorrect parameters, see help (Present -h)."
 
