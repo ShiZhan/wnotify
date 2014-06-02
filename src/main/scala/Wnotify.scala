@@ -3,11 +3,12 @@ object Wnotify {
   import helper.Version
   import kernel.Watcher
 
-  val usage = """usage: wnotify [-hv] [-c cycle|-s selector] [URL]
+  val usage = """usage: wnotify [-hv] [-c cycle|-s selector|-d] [URL]
  -h   print this message
  -v   show program version
  -c   cycle (millisecond)
- -s   selector"""
+ -s   selector
+ -d   show diff information"""
   val incorrectArgs = "Incorrect parameters, see help (Present -h)."
 
   def main(args: Array[String]) = {
@@ -17,7 +18,7 @@ object Wnotify {
       case "-v" :: Nil => println(Version.get)
       case optList if (!optList.isEmpty) =>
         val options = parse(optList)
-        Watcher.run(options.target, options.cycle, options.selector)
+        Watcher.run(options.target, options.cycle, options.selector, options.diff)
       case _ => println(incorrectArgs)
     }
   }
