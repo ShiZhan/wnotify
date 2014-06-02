@@ -16,6 +16,7 @@ object OptParse {
         else parse(more) ++ Map('cycle -> cycle.toInt)
       case "-s" :: selector :: more => parse(more) ++ Map('selector -> selector)
       case "-d" :: more => parse(more) ++ Map('diff -> true)
+      case "-f" :: more => parse(more) ++ Map('full -> true)
       case target :: more =>
         if (httpValidator.isValid(target)) parse(more) ++ Map('target -> target)
         else parse(more)
@@ -28,5 +29,7 @@ object OptParse {
     val cycle = o.get('cycle) match { case Some(c: Int) => c; case _ => 3600 * 1000 }
     val selector = o.get('selector) match { case Some(s: String) => s; case _ => "body" }
     val diff = o.get('diff) match { case Some(s: Boolean) => s; case _ => false }
+    val full = o.get('full) match { case Some(f: Boolean) => f; case _ => false }
+    val tuple = (isValid, target, cycle, selector, diff, full)
   }
 }

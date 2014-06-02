@@ -9,12 +9,11 @@ object Watcher {
 
   private val logger = org.slf4j.LoggerFactory.getLogger(this.getClass)
 
-  def run(target: String, cycle: Int, selector: String, diff: Boolean): Unit = {
+  def run(target: String, cycle: Int, selector: String, diff: Boolean, full: Boolean): Unit = {
     val timeout = 2000
     val webLog = MutableList[(Long, String)]((getMillis, "start"))
     var previous = ""
-    logger.info("URL: [{}], cycle: [{}], selector: [{}], diff: [{}]",
-      target, cycle.toString, selector, diff.toString)
+    logger.info("Options: [{}]", (target, cycle, selector, diff, full))
     logger.info("press Ctrl+C to exit")
     while (true) {
       try {
@@ -29,6 +28,10 @@ object Watcher {
             println("diff:")
             println(current diff previous)
             previous = current
+          }
+          if (full == true) {
+            println("content:")
+            println(current)
           }
         }
         webLog += ((dateTime, checksum))

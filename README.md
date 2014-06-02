@@ -26,6 +26,7 @@ How to use
 * -c:  content sampling cycle
 * -s:  a JQuery-style selector for designating content checking area
 * -d:  show diff information
+* -f:  show changed content
 
 output:
 

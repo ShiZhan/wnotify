@@ -8,7 +8,8 @@ object Wnotify {
  -v   show program version
  -c   cycle (millisecond)
  -s   selector
- -d   show diff information"""
+ -d   show diff information
+ -f   show changed content"""
   val incorrectArgs = "Incorrect parameters, see help (Present -h)."
 
   def main(args: Array[String]) = {
@@ -17,9 +18,8 @@ object Wnotify {
       case "-h" :: Nil => println(usage)
       case "-v" :: Nil => println(Version.get)
       case optList =>
-        val options = parse(optList)
-        if (options.isValid)
-          Watcher.run(options.target, options.cycle, options.selector, options.diff)
+        val (valid, target, cycle, selector, diff, full) = parse(optList).tuple
+        if (valid) Watcher.run(target, cycle, selector, diff, full)
         else println(incorrectArgs)
     }
   }
