@@ -5,7 +5,6 @@ version := "1.0"
 scalaVersion := "2.10.4"
 
 libraryDependencies ++= Seq(
-  "org.scala-lang" % "scala-actors" % "2.10.3",
   "commons-codec" % "commons-codec" % "1.9",
   "commons-validator" % "commons-validator" % "1.4.0",
   "org.jsoup" % "jsoup" % "1.7.3",
