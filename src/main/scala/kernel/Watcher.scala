@@ -3,7 +3,6 @@ package kernel
 object Watcher {
   import java.net.URL
   import org.jsoup.Jsoup
-  import helper.DateTime._
 
   private val logger = org.slf4j.LoggerFactory.getLogger(this.getClass)
 
