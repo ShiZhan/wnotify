@@ -3,7 +3,7 @@ object Wnotify {
   import helper.Version
   import kernel.Watcher
 
-  val usage = """usage: wnotify [-hv] [-c cycle|-s selector|-d] [URL]
+  val usage = """usage: wnotify [-hv] [-c cycle|-s selector|-d|-f] [URL]
  -h   print this message
  -v   show program version
  -c   cycle (millisecond)

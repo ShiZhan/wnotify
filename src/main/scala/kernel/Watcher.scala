@@ -2,8 +2,6 @@ package kernel
 
 object Watcher {
   import java.net.URL
-  import scala.collection.mutable.MutableList
-  import org.apache.commons.codec.digest.DigestUtils.md5Hex
   import org.jsoup.Jsoup
   import helper.DateTime._
 
@@ -11,7 +9,6 @@ object Watcher {
 
   def run(target: String, cycle: Int, selector: String, diff: Boolean, full: Boolean): Unit = {
     val timeout = 2000
-    val webLog = MutableList[(Long, String)]((getMillis, "start"))
     var previous = ""
     logger.info("Options: [{}]", (target, cycle, selector, diff, full))
     logger.info("press Ctrl+C to exit")
@@ -21,9 +18,8 @@ object Watcher {
         val doc = Jsoup.parse(new URL(target), timeout)
         val area = doc.select(selector)
         val current = area.toString
-        val checksum = md5Hex(current)
-        if (checksum != webLog.last._2) {
-          println(dateTime.toDate + "; " + checksum)
+        if (current != previous) {
+          println(dateTime.toDate)
           if (diff == true) {
             println("diff:")
             println(current diff previous)
@@ -34,7 +30,6 @@ object Watcher {
             println(current)
           }
         }
-        webLog += ((dateTime, checksum))
       } catch { case e: Exception => println(e) }
       Thread.sleep(cycle)
     }
