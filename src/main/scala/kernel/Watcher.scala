@@ -23,7 +23,7 @@ object Watcher {
         logger.info("Content changed")
         if (diff) println(current diff previous)
         if (full) println(current)
-        if (mail != "") println("TODO: send email notification")
+        if (mail != null) println("TODO: send email notification")
         current
       }
       case (previous, _) => previous
