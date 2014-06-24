@@ -3,11 +3,13 @@ package kernel
 object Watcher {
   import java.net.URL
   import org.jsoup.Jsoup
+  import helper.OptParse.Config
 
   private val logger = org.slf4j.LoggerFactory.getLogger(this.getClass)
 
-  def run(target: String, cycle: Int, selector: String, diff: Boolean, full: Boolean): Unit = {
-    logger.info("Options: [{}]", (target, cycle, selector, diff, full))
+  def run(config: Config): Unit = {
+    val Config(target, cycle, selector, diff, full, mail) = config
+    logger.info("Config: [{}]", (target, cycle, selector, diff, full, mail))
     logger.info("press Ctrl+C to exit")
     val timeout = 2000
     val url = new URL(target)
@@ -21,6 +23,7 @@ object Watcher {
         logger.info("Content changed")
         if (diff) println(current diff previous)
         if (full) println(current)
+        if (mail != "") println("TODO: send email notification")
         current
       }
       case (previous, _) => previous
