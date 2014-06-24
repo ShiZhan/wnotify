@@ -4,6 +4,7 @@ object Watcher {
   import java.net.URL
   import org.jsoup.Jsoup
   import helper.OptParse.Config
+  import helper.SendMail._
 
   private val logger = org.slf4j.LoggerFactory.getLogger(this.getClass)
 
@@ -23,7 +24,10 @@ object Watcher {
         logger.info("Content changed")
         if (diff) println(current diff previous)
         if (full) println(current)
-        if (mail != null) println("TODO: send email notification")
+        if (mail != null)
+          send(Mail(from = (mailer, "wNotify"), to = Seq(mail),
+            subject = "[wNotify] content changed",
+            message = "Previous:\n" + previous + "\nCurrent:\n" + current))
         current
       }
       case (previous, _) => previous

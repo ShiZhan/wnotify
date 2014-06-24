@@ -8,6 +8,7 @@ libraryDependencies ++= Seq(
   "commons-validator" % "commons-validator" % "1.4.0",
   "org.apache.commons" % "commons-email" % "1.3.2",
   "org.jsoup" % "jsoup" % "1.7.3",
+  "com.typesafe" % "config" % "1.2.1",
   "org.slf4j" % "slf4j-api" % "1.7.5",
   "org.slf4j" % "slf4j-log4j12" % "1.7.5",
   "log4j" % "log4j" % "1.2.17"

@@ -1,8 +1,16 @@
-object Mail {
-  import org.apache.commons.mail._
+package helper
 
-  implicit def stringToSeq(single: String): Seq[String] = Seq(single)
-  implicit def liftToOption[T](t: T): Option[T] = Some(t)
+object SendMail {
+  import org.apache.commons.mail._
+  import com.typesafe.config.ConfigFactory
+
+  private val mailConf = ConfigFactory.load("mail.conf")
+  private val hostName = mailConf.getString("email.hostname")
+  private val smtpPort = mailConf.getInt("email.port")
+  private val userName = mailConf.getString("email.username")
+  private val password = mailConf.getString("email.password")
+  private val ssl = mailConf.getBoolean("email.is.ssl")
+  val mailer = mailConf.getString("email.mailer")
 
   sealed abstract class MailType
   case object Plain extends MailType
@@ -18,13 +26,6 @@ object Mail {
     message: String,
     richMessage: Option[String] = None,
     attachment: Option[(java.io.File)] = None)
-
-  case class MailCredentials(
-    hostName: String,
-    port: Int = 25,
-    ssl: Boolean = false,
-    userName: Option[String] = None,
-    password: Option[String] = None)
 
   def send(mail: Mail) {
     val format =
@@ -44,7 +45,10 @@ object Mail {
       }
     }
 
-    // TODO Set authentication from your configuration, sys properties or w/e
+    commonsMail.setHostName(hostName)
+    commonsMail.setSmtpPort(smtpPort)
+    commonsMail.setAuthentication(userName, password)
+    commonsMail.setSSL(ssl)
 
     mail.to foreach (commonsMail.addTo)
     mail.cc foreach (commonsMail.addCc)
