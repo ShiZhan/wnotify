@@ -3,14 +3,12 @@ object Wnotify {
   import helper.Version
   import kernel.Watcher
 
-  val usage = """usage: wnotify [-hvcsdfm] [URL]
+  val usage = """usage: wnotify [-hvcse] [URL]
  -h   print this message
  -v   show program version
  -c   [cycle], UNIT: millisecond
  -s   [selector], DOM selector
- -d   show diff information
- -f   show changed content
- -m   [E-Mail address], send log via email"""
+ -e   [command], send log via external command"""
   val incorrectArgs = "Incorrect parameters, see help (Present -h)."
 
   def main(args: Array[String]) = {

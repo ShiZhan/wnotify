@@ -1,16 +1,16 @@
 package kernel
 
 object Watcher {
+  import java.io.{ BufferedReader, BufferedWriter, InputStreamReader, OutputStreamWriter }
   import java.net.URL
   import org.jsoup.Jsoup
   import helper.OptParse.Config
-  import helper.SendMail._
 
   private val logger = org.slf4j.LoggerFactory.getLogger(this.getClass)
 
   def run(config: Config): Unit = {
-    val Config(target, cycle, selector, diff, full, mail) = config
-    logger.info("Config: [{}]", (target, cycle, selector, diff, full, mail))
+    val Config(target, cycle, selector, exec) = config
+    logger.info("Config: [{}]", config)
     logger.info("press Ctrl+C to exit")
     val timeout = 2000
     val url = new URL(target)
@@ -21,13 +21,17 @@ object Watcher {
     val samples = Iterator.continually { Thread.sleep(cycle); check }
     (first /: samples) {
       case (previous, Some(current)) if (current != previous) => {
-        logger.info("Content changed")
-        if (diff) println(current diff previous)
-        if (full) println(current)
-        if (mail != null)
-          send(Mail(from = (mailer, "wNotify"), to = Seq(mail),
-            subject = "[wNotify] content changed",
-            message = "Previous:\n" + previous + "\nCurrent:\n" + current))
+        logger.info("Content changed to:")
+        println(current)
+        if (exec != null) {
+          logger.info("calling [{}]", exec)
+          val message = "Previous:\n" + previous + "\nCurrent:\n" + current
+          val p = Runtime.getRuntime.exec(exec)
+          val input = new BufferedReader(new InputStreamReader(p.getInputStream))
+          val output = new BufferedWriter(new OutputStreamWriter(p.getOutputStream))
+          output.write(message)
+          Iterator.continually(input.readLine).takeWhile(_ != null).foreach(println)
+        }
         current
       }
       case (previous, _) => previous
