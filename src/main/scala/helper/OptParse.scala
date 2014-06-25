@@ -34,7 +34,7 @@ object OptParse {
     val target = o.get('target) match { case Some(t: String) => t; case _ => "" }
     val cycle = o.get('cycle) match { case Some(c: Int) => c; case _ => 3600 * 1000 }
     val selector = o.get('selector) match { case Some(s: String) => s; case _ => "body" }
-    val exec = o.get('mail) match { case Some(e: String) => e; case _ => null }
+    val exec = o.get('exec) match { case Some(e: String) => e; case _ => null }
     def toConfig = if (isValid) Some(Config(target, cycle, selector, exec)) else None
   }
 }

@@ -1,6 +1,7 @@
 package kernel
 
 object Watcher {
+  import java.io.ByteArrayInputStream
   import java.net.URL
   import org.jsoup.Jsoup
   import helper.OptParse.Config
@@ -26,7 +27,7 @@ object Watcher {
           import sys.process._
           logger.info("calling [{}]", exec)
           val message = "Previous:\n" + previous + "\nCurrent:\n" + current
-          Seq(exec, message) !
+          exec #< new ByteArrayInputStream(message.getBytes) !!
         }
         current
       }
