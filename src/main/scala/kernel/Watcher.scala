@@ -1,7 +1,6 @@
 package kernel
 
 object Watcher {
-  import java.io.{ BufferedReader, BufferedWriter, InputStreamReader, OutputStreamWriter }
   import java.net.URL
   import org.jsoup.Jsoup
   import helper.OptParse.Config
@@ -24,13 +23,10 @@ object Watcher {
         logger.info("Content changed to:")
         println(current)
         if (exec != null) {
+          import sys.process._
           logger.info("calling [{}]", exec)
           val message = "Previous:\n" + previous + "\nCurrent:\n" + current
-          val p = Runtime.getRuntime.exec(exec)
-          val input = new BufferedReader(new InputStreamReader(p.getInputStream))
-          val output = new BufferedWriter(new OutputStreamWriter(p.getOutputStream))
-          output.write(message)
-          Iterator.continually(input.readLine).takeWhile(_ != null).foreach(println)
+          Seq(exec, message) !
         }
         current
       }
