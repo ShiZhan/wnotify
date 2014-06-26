@@ -26,8 +26,9 @@ object Watcher {
         if (exec != null) {
           import sys.process._
           logger.info("calling [{}]", exec)
-          val message = "Previous:\n" + previous + "\nCurrent:\n" + current
-          exec #< new ByteArrayInputStream(message.getBytes) !!
+          val msg = "Previous:\n" + previous + "\nCurrent:\n" + current
+          val is = new ByteArrayInputStream(msg.getBytes("UTF-8"))
+          (exec #< is).lines_!.foreach(println)
         }
         current
       }
