@@ -1,12 +1,9 @@
 package kernel
 
-object Watcher {
+object Watcher extends helper.Logging {
   import java.io.ByteArrayInputStream
   import java.net.URL
   import org.jsoup.Jsoup
-  import helper.OptParse.Config
-
-  private val logger = org.slf4j.LoggerFactory.getLogger(this.getClass)
 
   def run(config: Config): Unit = {
     val Config(target, cycle, selector, exec) = config

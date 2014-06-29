@@ -1,0 +1,7 @@
+usage: wnotify [-hvcse] [URL]
+ -h   print this message
+ -v   show program version
+ -c   [cycle],    UNIT: millisecond
+ -s   [selector], DOM selector
+ -e   [command],  send log via external command
+      [URL],      the Web URL to inspect

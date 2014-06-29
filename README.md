@@ -21,20 +21,20 @@ Or simply download the JAR file from the link below:
 How to use
 ==========
 
-    `wNotify [-hvcse] [URL]`
+    wNotify [-hvcse] [URL]
 
     * -h:  show help information
     * -v:  show version
     * -c [cycle]:     content sampling cycle
     * -s [selector]:  a JQuery-style selector for designating content checking area
     * -e [program]:   call an external program while content changes
-    * URL: target web page
+    *    [URL]:       the Web URL to inspect
 
 Use Ctrl+C to stop
 
 TIP:
 
 1. The selector can be found though Google Chrome Browser by using its "Inspect Element"
-2. default checking cycle is 1 hour
+2. Default checking cycle is 1 hour
 
 [Zhan.Shi](http://shizhan.github.io/) (c) 2014 [Apache License Version 2.0](http://www.apache.org/licenses/)
