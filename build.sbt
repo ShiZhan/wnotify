@@ -2,7 +2,7 @@ name := "wnotify"
 
 version := "1.0"
 
-scalaVersion := Option(System.getProperty("scala.version")).getOrElse("2.10.4")
+scalaVersion := Option(System.getProperty("scala.version")).getOrElse("2.11.2")
 
 libraryDependencies ++= Seq(
   "commons-validator" % "commons-validator" % "1.4.0",
