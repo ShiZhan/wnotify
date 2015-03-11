@@ -25,7 +25,7 @@ object Watcher extends helper.Logging {
           logger.info("calling [{}]", exec)
           val msg = s"<<<\n$previous\n>>>\n$current"
           val is = new ByteArrayInputStream(msg.getBytes("UTF-8"))
-          (exec #< is).lines_!.foreach(println)
+          (exec #< is).lineStream_!.foreach(println)
         }
         current
       }
