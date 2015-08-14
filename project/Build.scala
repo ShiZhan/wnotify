@@ -1,11 +1,32 @@
 import sbt._
 import Keys._
+import sbtassembly.Plugin._
+import AssemblyKeys._
 
 object MyBuild extends Build {
-  lazy val buildSettings = Defaults.defaultSettings ++ Seq(
-    version := "0.1-SNAPSHOT",
+  val scalaV = Option(System.getProperty("scala.version")).getOrElse("2.11.6")
+  val validV = "1.4.0"
+  val jsoupV = "1.8.1"
+  val confV  = "1.3.0"
+  val slf4jV = "1.7.12"
+  val log4jV = "1.2.17"
+
+  lazy val commonSettings = Defaults.defaultSettings ++ Seq(
+    version      := "0.1-SNAPSHOT",
     organization := "com.simba",
-    scalaVersion := Option(System.getProperty("scala.version")).getOrElse("2.10.6")
+    scalaVersion := scalaV,
+    scalacOptions in Compile ++= Seq(
+      "-encoding", "UTF-8",
+      "-deprecation", "-feature", "-unchecked",
+      "-Xlint"),
+    libraryDependencies ++= Seq(
+      "commons-validator" % "commons-validator" % validV,
+      "org.jsoup"    % "jsoup"  % jsoupV,
+      "com.typesafe" % "config" % confV,
+      "org.slf4j" % "slf4j-api"     % slf4jV,
+      "org.slf4j" % "slf4j-log4j12" % slf4jV,
+      "log4j"     % "log4j"         % log4jV
+    )
   )
 
   lazy val copyDependencies = TaskKey[Unit]("copyDep")
@@ -18,11 +39,13 @@ object MyBuild extends Build {
     }
   }
 
+  lazy val buildSettings = commonSettings
+
   lazy val wnotify = Project(
     id = "wnotify",
     base = file("."),
-    settings = Defaults.defaultSettings ++
-    sbtassembly.Plugin.assemblySettings ++
-    copyDepTask
+    settings = commonSettings ++ assemblySettings ++ copyDepTask ++ Seq(
+      logLevel in assembly := Level.Warn
+    )
   )
 }
