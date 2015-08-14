@@ -8,7 +8,7 @@ Deploy [Java](http://www.oracle.com/technetwork/java/javase/downloads/index.html
 
 1. Start sbt in project root
 2. Run "package"
-3. Use the scripts: wnotify (*NIX), wnotify (Windows) to run
+3. Use the scripts: wnotify (UNIX|Linux), wnotify (Windows) to run
 
 Or use "sbt assembly" to build JAR file for running directly from command line:
 
@@ -16,7 +16,7 @@ Or use "sbt assembly" to build JAR file for running directly from command line:
 
 Or simply download the JAR file from the link below:
 
-[download](http://goo.gl/N62TKr)
+[download](http://share.weiyun.com/1da7ffa79a3ccfe8087898115f0fa02b)
 
 How to use
 ==========
